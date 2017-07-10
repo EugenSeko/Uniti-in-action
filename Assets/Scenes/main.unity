@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4429985, g: 0.48546302, b: 0.5356819, a: 1}
+  m_IndirectSpecularColor: {r: 0.442998, g: 0.4854625, b: 0.5356818, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -693,6 +693,7 @@ GameObject:
   - component: {fileID: 1030923250}
   - component: {fileID: 1030923249}
   - component: {fileID: 1030923248}
+  - component: {fileID: 1030923253}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -711,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3b62e587d71bf479dbf59f2d585674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 2
+  axes: 1
   sensitivityHor: 9
   sensitivityVert: 9
   minimumVert: -45
@@ -786,6 +787,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1030923253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030923247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb8235fd64ca5742adc9b3eacef37bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  gravity: -9.8
 --- !u!1 &1108780703
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +877,7 @@ GameObject:
   - component: {fileID: 1123891772}
   - component: {fileID: 1123891771}
   - component: {fileID: 1123891770}
+  - component: {fileID: 1123891775}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -940,6 +955,22 @@ Transform:
   m_Father: {fileID: 1030923252}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123891775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123891769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3b62e587d71bf479dbf59f2d585674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityHor: 9
+  sensitivityVert: 9
+  minimumVert: -45
+  maximumVert: 45
 --- !u!1 &1368282586
 GameObject:
   m_ObjectHideFlags: 0

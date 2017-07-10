@@ -21,6 +21,13 @@ public class MouseLook : MonoBehaviour {
 
     private float _rotationX = 0;
 
+    private void Start()
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body != null)
+            body.freezeRotation = true;
+    }
+
     // Update is called once per frame
     void Update () {
         if (axes == RotationAxes.MouseX)
