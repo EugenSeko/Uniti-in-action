@@ -7,10 +7,13 @@ public class SceneController1 : MonoBehaviour {
     public const int gridCols = 4;
     public const float offsetX = 2.0f;
     public const float offsetY = 2.5f;
+    private int _score = 0;
+    private int _attempts = 0;
 
     [SerializeField] private MemoryCards originalCard;
     [SerializeField] private Sprite[] images;
-
+    [SerializeField] private TextMesh scoreLabel;
+    [SerializeField] private TextMesh attemptsLabel;
 
 	void Start () {
         Vector3 startPos = originalCard.transform.position;
@@ -56,5 +59,53 @@ public class SceneController1 : MonoBehaviour {
         }
         return newArray;
     }
-	
+
+    private MemoryCards _firstRevealed;
+    private MemoryCards _secondRevealed;
+    public bool canReveal //функция чтения, которая возвращает false, если вторая карта уже открыта.
+    {
+        get
+        {
+            return _secondRevealed == null;
+        }
+    }
+    public void CardRevealed(MemoryCards card)
+    {
+        if (_firstRevealed == null) //сохранение карт в одной из двух переменных, в зависимости от того какая из них свободна.
+        {
+            _firstRevealed = card;
+        }
+        else
+        {
+            _secondRevealed = card;
+            // Debug.Log("Match ?.." + (_secondRevealed.id == _firstRevealed.id));//сравнение идентификаторов двух открытых карт.
+            StartCoroutine(CheckMatch());//вызывает сопрограмму после открытия двух карт.
+        }
+    }
+    private IEnumerator CheckMatch()
+    {
+        _attempts++; // подсчет попыток.
+        if (_secondRevealed.id == _firstRevealed.id)
+        {
+            _score++;//увеличиваем счет на единицу, если идентификаторы двух карт совпадают.
+            scoreLabel.text = "Score : " + _score;//отображаемый текст - это задаваемое свойство текстовых объектов.
+        }
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+            _firstRevealed.Unreveal();//закрытие несовпадающих карт.
+            _secondRevealed.Unreveal();
+        }
+        _firstRevealed = null;  //очистка переменных вне зависимости от того было ли совпадение.
+        _secondRevealed = null;
+        attemptsLabel.text = "Attempts : " + _attempts; //отображаемый текст - это задаваемое свойство текстовых объектов. 
+    }
+    public void Restart()
+    {
+        Application.LoadLevel("Memory2D");//эта команда загружает ресурс сцену Memory2D.
+    }
+    public void Switch()
+    {
+        Application.LoadLevel("main");
+    }
 }

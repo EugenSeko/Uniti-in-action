@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Memory2D.unity
+    guid: 81d6840eea1077346bb20271bc04a1c6
+  - enabled: 1
+    path: Assets/Scenes/main.unity
+    guid: ce3464524e137314d940063f8eec7c02
