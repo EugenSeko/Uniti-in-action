@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class SettingsPopup : MonoBehaviour {
 
-  public void Open()
+    [SerializeField] private Slider speedSlider;
+
+    public void Start()
+    {
+        speedSlider.value = PlayerPrefs.GetFloat("speed", 1);
+    }
+
+    public void Open()
     {
         gameObject.SetActive(true);//активируем этот объект, чтобы открыть окно.
     }
-  public void Close()
+    public void Close()
     {
         gameObject.SetActive(false);//деактивируем объект, чтобы закрыть окно.
     }
@@ -19,5 +28,6 @@ public class SettingsPopup : MonoBehaviour {
     public void OnSpeedValue(float speed)
     {
         Debug.Log("Speed " + speed);
+        PlayerPrefs.SetFloat("speed", speed);
     }
 }
