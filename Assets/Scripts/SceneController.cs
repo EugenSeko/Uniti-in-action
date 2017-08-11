@@ -7,7 +7,16 @@ public class SceneController : MonoBehaviour {
     [SerializeField] private GameObject enemyPrefab;
     private GameObject _enemy;
 
-	void Update () {
+    private void Awake()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+    private void OnDestroy()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    void Update () {
         if (_enemy == null)
         {
             _enemy = Instantiate(enemyPrefab) as GameObject;
@@ -15,5 +24,11 @@ public class SceneController : MonoBehaviour {
             float angle = Random.Range(0, 360);
             _enemy.transform.Rotate(0, angle, 0);
         }
-	}
+    }
+
+    public void OnSpeedChanged(float value)//метод, объявленный в подписчике на событие SPEED_CHANGED.
+    {
+         WanderingAI.speed =  value*WanderingAI.baseSpeed;//меняем значение статического поля speed скрипта WanderingAI.
+    }
+
 }

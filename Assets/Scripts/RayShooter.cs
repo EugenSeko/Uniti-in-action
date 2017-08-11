@@ -16,7 +16,7 @@ public class RayShooter : MonoBehaviour {
 
     void OnGUI()
     {
-        int size = 12;
+        int size = 16;
         float posX = _camera.pixelWidth / 2 - size / 4;
         float posY = _camera.pixelHeight / 2 - size / 2;
         GUI.Label(new Rect(posX, posY, size, size),"*");
@@ -35,6 +35,7 @@ public class RayShooter : MonoBehaviour {
                 if (target != null) // Проверяем наличие у этого объекта компоненте ReactiveTarget.
                 {
                     target.ReactToHit();
+                    Messenger.Broadcast(GameEvent.ENEMY_HIT);//к реакции на попадание добавлена рассылка сообщения.
                 }
                 else
                 {

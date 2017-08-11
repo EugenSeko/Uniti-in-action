@@ -9,8 +9,18 @@ public class FPSInput : MonoBehaviour {
     public float speed = 6f;
     public float gravity = -9.8f;
     private CharacterController _charController;
+    public const float baseSpeed = 6f;//базовая скорость меняемая в соответствии с положением ползунка.
 
-     void Start()
+    private void Awake()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+    private void OnDestroy()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    void Start()
     {
         _charController = GetComponent<CharacterController>();
     }
@@ -27,4 +37,9 @@ public class FPSInput : MonoBehaviour {
         movement = transform.TransformDirection(movement);
         _charController.Move(movement);
 	}
+
+    public void OnSpeedChanged(float value)
+    {
+        speed = baseSpeed * value;//метод, объявленный в подписчике на событие SPEED_CHANGED.
+    }
 }

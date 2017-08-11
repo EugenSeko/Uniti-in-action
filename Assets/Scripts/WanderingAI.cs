@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WanderingAI : MonoBehaviour {
 
-    public float speed = 3f;
+    public static float speed=3;
+    public const float baseSpeed = 3f;//базовая скорость меняемая в соответствии с положением ползунка.
+
     public float obstacleRange = 5f;
     private bool _alive;
 
@@ -15,9 +17,8 @@ public class WanderingAI : MonoBehaviour {
     private void Start()
     {
         _alive = true;
-
-    }
-
+        // speed = PlayerPrefs.GetFloat("speed")*baseSpeed;
+}
 
     void Update () {
         if (_alive)
